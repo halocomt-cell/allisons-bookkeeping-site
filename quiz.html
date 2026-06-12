@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<section>
+<h2>Bookkeeping Estimate Quiz</h2>
+
+<form id="quizForm">
+
+<label>Business Type</label>
+<select id="business">
+<option>Construction</option>
+<option>Real Estate</option>
+<option>Cleaning</option>
+<option>Beauty</option>
+<option>Professional Services</option>
+<option>Retail</option>
+</select>
+
+<br><br>
+
+<label>Need</label>
+<select id="need">
+<option value="monthly">Monthly Bookkeeping</option>
+<option value="cleanup">Cleanup + Monthly</option>
+<option value="onetime">One Time Cleanup</option>
+</select>
+
+<br><br>
+
+<label>Transactions Per Month</label>
+<select id="transactions">
+<option value="75">Under 75</option>
+<option value="200">75-200</option>
+<option value="500">200-500</option>
+<option value="1000">500+</option>
+</select>
+
+<br><br>
+
+<button type="button" onclick="calculateEstimate()">Estimate</button>
+
+</form>
+
+<h3 id="result"></h3>
+
+</section>
+
+<script>
+function calculateEstimate() {
+    let tx = parseInt(document.getElementById("transactions").value);
+    let need = document.getElementById("need").value;
+
+    let monthly = 0;
+
+    if (tx <= 75) monthly = 300;
+    else if (tx <= 200) monthly = 500;
+    else if (tx <= 500) monthly = 800;
+    else monthly = 1200;
+
+    let result = "Estimated Monthly Cost: $" + monthly;
+
+    if (need === "cleanup") {
+        result += " + Cleanup Fee ($500-$3000)";
+    }
+
+    if (need === "onetime") {
+        result = "Cleanup projects require consultation for exact pricing.";
+    }
+
+    document.getElementById("result").innerText = result;
+}
+</script>
+
+</body>
+</html>
